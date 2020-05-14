@@ -68,7 +68,7 @@
     <!-- 参数对话框-->
     <el-dialog title="请填写参数" class="dialog-expand" :visible.sync="dialogparamFormVisible">
       <el-form :model="paramForm" >
-        <el-form-item v-for="item in paramForm.conList" :label="item.fieldName" :label-width="formLabelWidth">
+        <el-form-item :key="index" v-for="item in paramForm.conList" :label="item.fieldName" :label-width="formLabelWidth">
           <el-input :placeholder="item.field" v-model="item.fieldValue" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>

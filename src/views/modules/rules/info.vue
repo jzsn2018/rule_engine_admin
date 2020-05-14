@@ -27,7 +27,7 @@
                     <span>{{ displayName(ruleEnabledList,props.row.ruleEnabled) }}</span>
                   </el-form-item>
                   <el-form-item label="规则条件">
-                    <el-tooltip v-for="(item,index) in props.row.conditionInfoItem" class="item" effect="dark" :content="item.conditionDesc" placement="bottom">
+                    <el-tooltip :key="index" v-for="(item,index) in props.row.conditionInfoItem" class="item" effect="dark" :content="item.conditionDesc" placement="bottom">
                     <span >{{ item.conditionExpression }}&nbsp;</span>
                     </el-tooltip>
                   </el-form-item>

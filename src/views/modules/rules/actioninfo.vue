@@ -27,7 +27,7 @@
                     <span>{{ props.row.actionDesc }}</span>
                   </el-form-item>
                   <el-form-item label="动作参数">
-                    <el-tooltip v-for="(item,index) in props.row.actionParamItem" class="item" effect="dark"  placement="bottom">
+                    <el-tooltip :key="index" v-for="(item,index) in props.row.actionParamItem" class="item" effect="dark"  placement="bottom">
                       <div slot="content"> 参数名称:&nbsp;{{item.actionParamName}} <br/> 参数值:&nbsp;{{ item.paramValueStr }} </div>
                     <span >{{ item.paramIdentify }}&nbsp;</span>
                     </el-tooltip>
