@@ -163,10 +163,10 @@
     },
     mounted() {
       (async () => {
+        this.getPropertySelectList()
         this.getisEffectListDict()
         this.getSceneDataList()
         this.getActionDataList()
-        this.getPropertySelectList()
       })()
     },
     methods: {
@@ -298,7 +298,7 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
-              url: this.$http.adornUrl(`/rules/info/${!this.dataForm.ruleId ? 'save' : 'update'}`),
+              url: this.$http.adornUrl(`/rules/info/save`),
               method: 'post',
               data: this.$http.adornData({
                 'ruleId': this.dataForm.ruleId || undefined,

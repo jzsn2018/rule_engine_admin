@@ -66,7 +66,7 @@
       <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
         <template slot-scope="scope">
           <el-button v-if="scope.row.ruleEnabled==1" type="text" size="small" @click="overEnabledHandle(scope.row.ruleId)">停用</el-button>
-          <el-button v-if="scope.row.ruleEnabled==0" type="text" size="small" @click="startEnabledHandle(scope.row.ruleId)">启用</el-button>
+          <el-button v-if="scope.row.ruleEnabled==2" type="text" size="small" @click="startEnabledHandle(scope.row.ruleId)">启用</el-button>
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.ruleId)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.ruleId)">删除</el-button>
         </template>
@@ -216,10 +216,66 @@
         })
       },
       startEnabledHandle(id){
-        console.log(id)
+        this.$confirm(`确定对[id=${id}]进行启用操作?`,`提示`,{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
+          this.$http({
+            url: this.$http.adornUrl('/rules/info/startOrStop'),
+            method: 'get',
+            params: this.$http.adornParams({
+              'ruleId': id,
+              'enable': 1
+            })
+          }).then(({
+            data
+            })=>{
+              if(data && data.code===0){
+                this.$message({
+                  message: '操作成功',
+                  type: 'success',
+                  duration: 1500,
+                  onClose: ()=>{
+                    this.getDataList()
+                  }
+                })
+              } else {
+                this.$message.error(data.msg)
+              }
+            })
+        })
       },
       overEnabledHandle(id){
-        console.log(id)
+        this.$confirm(`确定对[id=${id}]进行停用操作?`,`提示`,{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
+          this.$http({
+            url: this.$http.adornUrl('/rules/info/startOrStop'),
+            method: 'get',
+            params: this.$http.adornParams({
+              'ruleId': id,
+              'enable': 2
+            })
+          }).then(({
+            data
+            })=>{
+              if(data && data.code===0){
+                this.$message({
+                  message: '操作成功',
+                  type: 'success',
+                  duration: 1500,
+                  onClose: ()=>{
+                    this.getDataList()
+                  }
+                })
+              } else {
+                this.$message.error(data.msg)
+              }
+            })
+        })
       },
       // 删除
       deleteHandle(id) {

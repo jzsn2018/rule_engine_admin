@@ -112,7 +112,7 @@
       width: 100%;
       height: 100%;
       content: "";
-      background-image: url(~@/assets/img/login_bg.jpg);
+      background-image: url(~@/assets/img/login.jpg);
       background-size: cover;
     }
     .site-content__wrapper {
